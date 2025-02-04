@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Surprise</title>
+  <style>
+    /* General styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      background: linear-gradient(135deg, #FFD1DC, #FFB6C1);
+      overflow: hidden;
+      position: relative;
+    }
+    .container {
+      background: #FFF;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 500px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none; /* Initially hide all pages */
+    }
+    .container.active {
+      display: block; /* Show active page */
+    }
+    /* Background colors for each page */
+    #page1 { background: linear-gradient(135deg, #FFB6C1, #FFD1DC); }
+    #page2 { background: linear-gradient(135deg, #FFD1DC, #FFB6C1); }
+    #page3 { background: linear-gradient(135deg, #FFB6C1, #FFD1DC); }
+    #page5 { background: linear-gradient(135deg, #FFD1DC, #FFB6C1); }
+    /* Button styling */
+    button {
+      background: #FF5A5F;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.2s;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    button:hover {
+      background: #D62839;
+      transform: scale(1.05);
+    }
+    .valentine-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .yes-button {
+      background: #FF3E3E;
+      font-weight: bold;
+    }
+    .no-button {
+      background: #FFF;
+      color: #FF3E3E;
+      border: 2px solid #FF3E3E;
+    }
+    .no-button:hover {
+      background: #FF3E3E;
+      color: white;
+    }
+    /* Page 5 text styling */
+    #page5 h1, #page5 p {
+      color: #FF3E3E;
+    }
+    /* Styling for Tenor GIF embed */
+    .tenor-gif-embed {
+      margin: 20px auto;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    /* Make the page responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      p {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+      }
+      button {
+        font-size: 16px;
+        padding: 10px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Page 1 -->
+<div id="page1" class="container active">
+  <h1 style="text-decoration: solid;">💖💖For my Love💖💖</h1>
+  <p>
+
+  </p>
+  <p>Welcome! I have an important question for you...</p>
+  <button onclick="showPage(2)">Next ➡</button>
+</div>
+<!-- Page 2 -->
+<div id="page2" class="container">
+  <h1>Will you be my valentine? <p>💖❤️💕💘💌💝💑👩‍❤️‍👨🌹💐💋🥰</p> </h1>
+  <div class="valentine-buttons">
+    <button class="yes-button" onclick="showPage(3)">YES!</button>
+    <button class="no-button" id="noButton">no</button>
+  </div>
+</div>
+<!-- Page 3 -->
+<div id="page3" class="container">
+  <!-- Embed Tenor GIF -->
+  <div class="tenor-gif-embed" data-postid="24559076" data-share-method="host" data-aspect-ratio="1.15108" data-width="100%">
+    <a href="https://tenor.com/view/hasher-sticker-gif-24559076">Hasher Sticker Sticker</a> from 
+    <a href="https://tenor.com/search/hasher+sticker-stickers">Hasher Sticker Stickers</a>
+  </div>
+  <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+  <h1>Yay! 🎉</h1>
+  <p>Thank you, babe! ❤️🥰❤️</p>
+  <p>I Have surprise for u ! ❤️🥰❤️</p>
+  <button onclick="redirectToOtherPage()">Click for Surprise</button>
+</div>
+<!-- Page 5 -->
+<div id="page5" class="container">
+  <h1>Darling, you mean so much to me! 💖</h1>
+  <p>Thank you for being a part of my life. I love you so much! ❤️</p>
+  <button onclick="showPage(1)">Back to Start</button>
+</div>
+<script>
+// Function to show a specific page
+function showPage(pageNumber) {
+  // Hide all pages
+  const pages = document.querySelectorAll('.container');
+  pages.forEach(page => page.classList.remove('active'));
+  // Show the requested page
+  const currentPage = document.getElementById(`page${pageNumber}`);
+  currentPage.classList.add('active');
+}
+
+// Funny texts for the "No" button
+const noButtonTexts = ["lol 😂", "are you sure? 🤔", "try again! 😜", "really? 🤨", "seriously? 😅", "don't be like that! 😝"];
+let currentIndex = 0;
+
+// Make the "No" button move to a random position and change its text each time clicked
+document.getElementById("noButton").addEventListener("click", function() {
+  const rect = this.parentElement.getBoundingClientRect();
+  const randomX = Math.random() * (rect.width - this.offsetWidth);
+  const randomY = Math.random() * (rect.height - this.offsetHeight);
+  this.style.position = "absolute";
+  this.style.left = `${randomX}px`;
+  this.style.top = `${randomY}px`;
+
+  // Change the "No" button text
+  currentIndex = (currentIndex + 1) % noButtonTexts.length; // Loop through the texts
+  this.textContent = noButtonTexts[currentIndex];
+});
+
+// Function to redirect to another page
+function redirectToOtherPage() {
+  window.location.href = "cui/flower.html"; // Change this path to match your file
+}
+</script>
+</body>
+</html>
