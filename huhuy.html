@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kata Valentine</title>
+  <title>Valentine Words</title>
   <style>
-    /* Gaya umum */
+    /* General style */
     * {
       margin: 0;
       padding: 0;
@@ -24,14 +24,15 @@
     }
     .container {
       background: #FFF;
-      padding: 40px;
+      padding: 20px;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      width: 80%;
+      width: 90%;
       max-width: 500px;
       text-align: center;
+      box-sizing: border-box;
     }
-    /* Tombol */
+    /* Button styles */
     button {
       background: #FF5A5F;
       color: white;
@@ -41,7 +42,7 @@
       font-size: 18px;
       cursor: pointer;
       margin: 10px;
-      transition: 0.2s; /* Animasi tombol lebih cepat */
+      transition: 0.2s; /* Button animation speed */
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     }
     button:hover {
@@ -66,7 +67,7 @@
       background: #FF3E3E;
       color: white;
     }
-    /* Teks utama */
+    /* Main text */
     h1 {
       font-size: 2rem;
       color: #FF3E3E;
@@ -77,25 +78,60 @@
       color: #555;
       margin-bottom: 30px;
     }
+
+    /* Make the page responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      button {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+    }
   </style>
 </head>
 <body>
-<audio src="mantap.mp3"></audio>
+  <audio src="mantap.mp3"></audio>
 <div class="container">
   <h1>💖</h1>
-  <h1>Sayang, kamu sangat berarti untukku! 💖</h1>
-  <p>Terima kasih telah menjadi bagian dari hidupku. Aku sangat mencintaimu! ❤️</p>
+  <h1>Darling, you mean so much to me! 💖</h1>
+  <p id="message">Thank you for being a part of my life. I love you so much! ❤️</p>
   <div class="valentine-buttons">
-    <button class="yes-button" onclick="alert('Yay! 🎉')">YES!</button>
-    <button class="no-button" id="noButton">no</button>
+    <button class="yes-button" id="yesButton">YES! 💕</button>
+    <button class="no-button" id="noButton">no 🙄</button>
   </div>
 </div>
+
 <script>
-// Kata-kata ejekan untuk tombol "No"
-const noButtonTexts = ["wleee", "yakin?", "coba lagi!", "masa sih?", "serius?", "jangan gitu dong!"];
+// Love messages with emoticons
+const loveMessages = [
+  "I love you more than words can say 💖.",
+  "You are the reason I smile every day 😊.",
+  "Every moment with you is a beautiful gift 🎁.",
+  "My heart belongs to you, forever 💕.",
+  "There is nothing more blissful than sharing life with you 🌹.",
+  "You are my true love 💌.",
+  "You make my life more beautiful every day 🌟.",
+  "I want to spend the rest of my life with you 🥰.",
+  "I will always be here for you, no matter what 🤗.",
+  "Our love story is the most beautiful one ever told 💘."
+];
+
+// Change the message when the YES button is clicked
+document.getElementById("yesButton").addEventListener("click", function() {
+  const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+  document.getElementById("message").textContent = randomMessage;
+});
+
+// Funny texts for the "No" button
+const noButtonTexts = ["lol 😂", "are you sure? 🤔", "try again! 😜", "really? 🤨", "seriously? 😅", "don't be like that! 😝"];
 let currentIndex = 0;
 
-// Buat tombol "No" bergerak ke posisi acak dan ubah teksnya setiap kali diklik
+// Make the "No" button move to a random position and change its text every click
 document.getElementById("noButton").addEventListener("click", function() {
   const rect = this.parentElement.getBoundingClientRect();
   const randomX = Math.random() * (rect.width - this.offsetWidth);
@@ -104,10 +140,11 @@ document.getElementById("noButton").addEventListener("click", function() {
   this.style.left = `${randomX}px`;
   this.style.top = `${randomY}px`;
 
-  // Ubah teks tombol "No"
-  currentIndex = (currentIndex + 1) % noButtonTexts.length; // Loop melalui array teks
+  // Change the "No" button text
+  currentIndex = (currentIndex + 1) % noButtonTexts.length; // Loop through the texts
   this.textContent = noButtonTexts[currentIndex];
 });
 </script>
+
 </body>
 </html>
